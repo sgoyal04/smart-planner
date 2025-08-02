@@ -7,6 +7,7 @@ A modern, full-stack calendar management application built with Next.js that all
 - **Multi-Profile Management**: Create and manage multiple calendar profiles (Work, Personal, etc.)
   <img src="public/multiple_profiles.png" width="400"/>
 - **Interactive Calendar**: Full-featured calendar interface with multiple view modes
+  <img src="public/week_view.png" width="400"/>
 - **Event Management**: Create, view, and organize events with detailed information
   <img src="public/event_creation.png" width="400"/>
 - **Secure Authentication**: Google OAuth integration for secure user login
