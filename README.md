@@ -5,9 +5,12 @@ A modern, full-stack calendar management application built with Next.js that all
 ## 🚀 Features
 
 - **Multi-Profile Management**: Create and manage multiple calendar profiles (Work, Personal, etc.)
+  <img src="public/multiple_profiles.png" width="400"/>
 - **Interactive Calendar**: Full-featured calendar interface with multiple view modes
 - **Event Management**: Create, view, and organize events with detailed information
+  <img src="public/event_creation.png" width="400"/>
 - **Secure Authentication**: Google OAuth integration for secure user login
+  <img src="public/google_auth.png" width="400"/>
 - **Responsive Design**: Mobile-friendly interface that works across all devices
 - **Real-time Updates**: Optimistic UI updates for smooth user experience
 
@@ -156,8 +159,6 @@ model Event {
 5. **View Events**: Switch between month, week, day, and list views
 6. **Manage Profiles**: Delete profiles using the three-dot menu
 
-## 🔧 Development
-
 ### Project Structure
 
 ```
@@ -175,25 +176,6 @@ smart-planner/
 ├── prisma/              # Database schema and migrations
 └── types/               # TypeScript type definitions
 ```
-
-### Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build production application
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
