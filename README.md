@@ -178,6 +178,12 @@ smart-planner/
 └── types/               # TypeScript type definitions
 ```
 
+## Future Implementation Goals
+
+1. **All Events**: Users will be able to view/edit all the events in the main(default) profile.
+2. **Drag/Drop Events**: Users will be able to drag/drop event from a set schedule to another schedule.
+3. **Share Profiles**: Users will be able to share and collaborate their profile(s) with another user.
+
 ## 🙏 Acknowledgments
 
 - [Next.js](https://nextjs.org/) - The React framework
