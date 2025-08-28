@@ -150,21 +150,10 @@ smart-planner/
 
 ## Future Implementation Goals
 
-1. **All Events**: Users will be able to view/edit all the events in the main(default) profile.
-2. **Drag/Drop Events**: Users will be able to drag/drop event from a set schedule to another schedule.
-3. **Share Profiles**: Users will be able to share and collaborate their profile(s) with another user.
-4. **Track Progress**: Users will be able to mark task/event as completed and will be counted toward progress for the profile and can view this data to better plan for the next time.
-5. **Transfer Events**: Transfer the remaining tasks of the day to another day.
-
-## 🙏 Acknowledgments
-
-- [Next.js](https://nextjs.org/) - The React framework
-- [Prisma](https://prisma.io/) - Database toolkit
-- [FullCalendar](https://fullcalendar.io/) - Calendar component
-- [shadcn/ui](https://ui.shadcn.com/) - UI components
-- [NextAuth.js](https://next-auth.js.org/) - Authentication solution
-
----
+1. **Drag/Drop Events**: Users will be able to drag/drop event from a set schedule to another schedule.
+2. **Share Profiles**: Users will be able to share and collaborate their profile(s) with another user.
+3. **Track Progress**: Users will be able to mark task/event as completed and will be counted toward progress for the profile and can view this data to better plan for the next time.
+4. **Transfer Events**: Transfer the remaining tasks of the day to another day.
 
 **Built by Sanika Goyal**
 

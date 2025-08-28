@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 
-export default function LeftToolbar({ selectedId, setSelectedId }: { selectedId: string, setSelectedId: (id: string) => void }) {
+export default function LeftToolbar({ selectedId, setSelectedId, setMainProfileId }: { selectedId: string, setSelectedId: (id: string) => void , setMainProfileId: (id:string) => void}) {
     const [profiles, setProfiles] = useState<{ id: string; name: string }[]>([]);
     const [loading, setLoading] = useState(true);
     const [adding, setAdding] = useState(false);
@@ -18,6 +18,7 @@ export default function LeftToolbar({ selectedId, setSelectedId }: { selectedId:
                 setProfiles(data.profiles);
                 if (data.profiles.length && !selectedId) {
                     setSelectedId(data.profiles[0].id);
+                    setMainProfileId(data.profiles[0].id);
                 }
             }
             setLoading(false);

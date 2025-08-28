@@ -28,7 +28,7 @@ interface Event {
   notes: string;
 }
 
-export default function Schedule({selectedProfileId}: {selectedProfileId: string}){
+export default function Schedule({selectedProfileId, mainProfileId}: {selectedProfileId: string, mainProfileId:string}){
   const [events, setEvents] = useState<Event[]>([]);
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -43,7 +43,13 @@ export default function Schedule({selectedProfileId}: {selectedProfileId: string
   useEffect(()=> {
     async function fetchEvents(){
     
-      const response = await fetch(`/api/profiles/${selectedProfileId}/events`);
+      let url;
+      if(mainProfileId == selectedProfileId)
+        url = `/api/profiles/allEvents`;
+      else
+        url = `/api/profiles/${selectedProfileId}/events`;
+      
+      const response = await fetch(url);
       if(response.ok){
         const data = await response.json();
         setEvents(data.events);

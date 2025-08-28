@@ -9,6 +9,7 @@ import Schedule from "@/components/Schedule";
 export default function Dashboard() {
   const { data: session, status } = useSession();
   const [selectedProfileId, setSelectedProfileId] = useState<string>("");
+  const [mainProfileId, setMainProfileId] = useState<string>("");
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -30,9 +31,9 @@ export default function Dashboard() {
       {/* Main content area with left sidebar and center content */}
       <div className="flex">
        
-      <LeftToolbar selectedId={selectedProfileId} setSelectedId={setSelectedProfileId} />
+      <LeftToolbar selectedId={selectedProfileId} setSelectedId={setSelectedProfileId} setMainProfileId={setMainProfileId}/>
       <div className="h-screen w-screen">
-        <Schedule selectedProfileId={selectedProfileId}/>
+        <Schedule selectedProfileId={selectedProfileId} mainProfileId={mainProfileId}/>
       </div>
       
         

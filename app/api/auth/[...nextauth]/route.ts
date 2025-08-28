@@ -32,6 +32,8 @@ export const authOptions : NextAuthOptions = {
             if (!profile?.email) {
                 throw new Error('No profile')
             }
+            const existingUser = await prisma.user.findUnique({where:{email:profile.email}});
+
             await prisma.user.upsert({
                 where: {
                 email: profile.email,
@@ -43,8 +45,17 @@ export const authOptions : NextAuthOptions = {
                 update: {
                 name: profile.name,
                 },
-            })
-            return true
+            });
+            const newUser = await prisma.user.findUnique({where:{email:profile.email}});
+            if (!existingUser && newUser){
+                await prisma.profile.create(
+                    {data:{
+                        name:"Main",
+                        userId: newUser.id,
+                    }}
+                );
+            }
+            return true;
         },
         
         async session({ session, token }:any) {
@@ -67,7 +78,7 @@ export const authOptions : NextAuthOptions = {
                 }
                 token.id = user.id
             }
-            return token
+            return token;
         },
     },
 }
