@@ -1,6 +1,12 @@
 # Smart Planner 📅
 
-A modern, full-stack calendar management application built with Next.js that allows users to create multiple profiles and manage events seamlessly across different contexts.
+A modern, full-stack calendar management application built with Next.js that allows users to create multiple profiles(such as work, school, fun activities etc) and manage events seamlessly across different contexts.
+
+# Why Smart Planner ?
+
+- Focus on one priority at a time by organizing related events in a dedicated profile (work, school, vacation etc).
+- Broaden your view to visualise availablity by viewing all events across profiles in the main profile.
+- Go through checklist from the day view of the main profile to complete tasks at hand for the day.
 
 ## 🚀 Features
 
@@ -98,42 +104,6 @@ Before running this project, make sure you have:
 
    Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## 🗄️ Database Schema
-
-The application uses three main models:
-
-- **User**: Stores user information from Google OAuth
-- **Profile**: Different calendar contexts (Work, Personal, etc.)
-- **Event**: Individual calendar events with timestamps and notes
-
-```prisma
-model User {
-  id        String    @id @default(uuid())
-  name      String?
-  email     String    @unique
-  profiles  Profile[]
-  createdAt DateTime  @default(now())
-}
-
-model Profile {
-  id     String  @id @default(uuid())
-  name   String
-  userId String
-  User   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  events Event[]
-}
-
-model Event {
-  id        String   @id @default(uuid())
-  name      String
-  startTime DateTime
-  endTime   DateTime
-  notes     String
-  profileId String
-  Profile   Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
-}
-```
-
 ## 🚦 API Endpoints
 
 ### Profiles
@@ -183,6 +153,8 @@ smart-planner/
 1. **All Events**: Users will be able to view/edit all the events in the main(default) profile.
 2. **Drag/Drop Events**: Users will be able to drag/drop event from a set schedule to another schedule.
 3. **Share Profiles**: Users will be able to share and collaborate their profile(s) with another user.
+4. **Track Progress**: Users will be able to mark task/event as completed and will be counted toward progress for the profile and can view this data to better plan for the next time.
+5. **Transfer Events**: Transfer the remaining tasks of the day to another day.
 
 ## 🙏 Acknowledgments
 
