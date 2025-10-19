@@ -40,9 +40,10 @@ export default function Schedule({selectedProfileId, mainProfileId}: {selectedPr
     endTime:"",
     notes:""
   });
+
+  {/* Fetch all the events of selected profile. */}
   useEffect(()=> {
     async function fetchEvents(){
-    
       let url;
       if(mainProfileId == selectedProfileId)
         url = `/api/profiles/allEvents`;
@@ -63,6 +64,7 @@ export default function Schedule({selectedProfileId, mainProfileId}: {selectedPr
       fetchEvents();
     }
   }, [selectedProfileId])
+
   {/* Display dialog box for creating event*/}
   function handleDateClick(info:any){
     const clickedDate = info.dateStr;
@@ -78,6 +80,7 @@ export default function Schedule({selectedProfileId, mainProfileId}: {selectedPr
     })
     setIsDialogOpen(true);    // triggers dialog box
   }
+
   {/*Cancel creating event -> close the dialog,erase the event,unselectDate, unsetLoading */}
   function handleCloseDialog(){
     setIsDialogOpen(false);
@@ -102,7 +105,8 @@ export default function Schedule({selectedProfileId, mainProfileId}: {selectedPr
       return;
     }
     setIsLoading(true);
-    
+
+    // Add event to the database
     try{
       const response = await fetch(
         `/api/profiles/${selectedProfileId}/events`,
@@ -160,7 +164,7 @@ export default function Schedule({selectedProfileId, mainProfileId}: {selectedPr
           dateClick={(e) => {handleDateClick(e)}}
           events={formattedEvents}
           
-          // eventContent={renderEventContent}
+          eventClick={handleEventClick}
         />
       </div>
       {/* Event creation Dialog */}
@@ -221,7 +225,9 @@ export default function Schedule({selectedProfileId, mainProfileId}: {selectedPr
                 />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="notes" className="textRight">Notes </Label>
+              <Label htmlFor="notes" className="textRight"> 
+                Notes 
+              </Label>
               <Textarea
                 id="notes"
                 value={newEvent.notes}

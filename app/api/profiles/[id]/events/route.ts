@@ -3,6 +3,7 @@ import {getServerSession} from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import {prisma} from "@/lib/prisma";
 
+{/* get, add events to a given profile */}
 
 export async function GET(request: Request, {params}: {params: {id:string}}){
     const session = await getServerSession(authOptions);

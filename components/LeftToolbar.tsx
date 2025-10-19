@@ -10,6 +10,7 @@ export default function LeftToolbar({ selectedId, setSelectedId, setMainProfileI
     const [menuOpen, setMenuOpen] = useState<string | null>(null); // Track which menu is open
     const inputRef = useRef<HTMLInputElement>(null);
 
+    {/* Fetch profiles once to display profiles. */}
     useEffect(() => {
         async function fetchProfiles() {
             const res = await fetch("/api/profiles");
@@ -26,12 +27,29 @@ export default function LeftToolbar({ selectedId, setSelectedId, setMainProfileI
         fetchProfiles();
     }, []);
 
+    {/* Display the input field if user is creating a new profile. */}
     useEffect(() => {
         if (adding && inputRef.current) {
             inputRef.current.focus();
         }
     }, [adding]);
 
+    {/* Stop displaying the toggle menu after user click elsewhere on the page. */}
+    useEffect(() => {
+        if (!menuOpen) return;
+
+        function handleClickOutside(event: MouseEvent) {
+            setMenuOpen(null);
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [menuOpen]);
+
+    {/* Add profile and update the local profiles list */}
     async function handleAddProfile() {
         if (!newProfileName.trim()) return;
         const res = await fetch("/api/profiles", {
@@ -48,31 +66,40 @@ export default function LeftToolbar({ selectedId, setSelectedId, setMainProfileI
         }
     }
 
+    {/* Delete a profile and update the profiles list. */}
     async function handleDeleteProfile(profileId: string) {
-        if (profiles.length <= 1) {
+        try{
+            if (profiles.length <= 1) {
             alert("Cannot delete the last profile");
             return;
         }
-        
-        if (confirm("Are you sure you want to delete this profile?")) {
-            const res = await fetch(`/api/profiles`, {
-                method: "DELETE",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({id:profileId})
-            });
-            if (res.ok) {
-                setProfiles(prev => prev.filter(p => p.id !== profileId));
-                if (selectedId === profileId) {
-                    const remaining = profiles.filter(p => p.id !== profileId);
-                    if (remaining.length > 0) {
-                        setSelectedId(remaining[0].id);
-                    }
+            if (profiles[0].id == profileId){
+                alert("You cannot delete the main profile.");
+                return;
+            }
+            
+            if (confirm("All the events of this profile will be deleted as well.\nAre you sure you want to delete this profile?")) {
+                const res = await fetch(`/api/profiles`, {
+                    method: "DELETE",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({id:profileId})
+                });
+                if (res.ok) {
+                    setProfiles(prev => prev.filter(p => p.id !== profileId));
+                    if (selectedId === profileId) {
+                        const remaining = profiles.filter(p => p.id !== profileId);
+                        if (remaining.length > 0) {
+                            setSelectedId(remaining[0].id);
+                        }
+                    }   
                 }
-                setMenuOpen(null);
             }
         }
+        finally{setMenuOpen(null);}
+        
     }
 
+    {/* When user press esc, cancel creating a new profile */}
     function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
         if (e.key === "Enter") {
             handleAddProfile();
@@ -128,7 +155,7 @@ export default function LeftToolbar({ selectedId, setSelectedId, setMainProfileI
                         </div>
                     </div>
                 ))}
-                
+                {/* Adding new profile menu */}
                 {adding ? (
                     <input 
                         ref={inputRef}

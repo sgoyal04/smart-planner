@@ -3,6 +3,8 @@ import {getServerSession} from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import {prisma} from "@/lib/prisma";
 
+{/* edit an existing event. */}
+
 export async function PUT(request:Request, {params}: {params:{id:string, eventId:string}}){
     const session = await getServerSession(authOptions);
     const resolvedParams = await params; 
